@@ -1,0 +1,182 @@
+current_crisis_html = '''<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Current Crisis 2024-2026 | Rohingya Emergency Updates</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --primary: #1a365d; --secondary: #c53030; --accent: #d69e2e; --success: #38a169; --text: #2d3748; --light: #f7fafc; --white: #ffffff; --border: #e2e8f0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: var(--text); background: var(--white); }
+        
+        .donation-banner { background: linear-gradient(90deg, #c53030, #e53e3e); color: white; text-align: center; padding: 10px; font-weight: 700; font-size: 14px; }
+        .donation-banner a { color: #d69e2e; text-decoration: underline; font-weight: 800; }
+        
+        .navbar { background: var(--primary); position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .nav-container { max-width: 1200px; margin: 0 auto; padding: 1rem; display: flex; justify-content: space-between; align-items: center; }
+        .logo { color: var(--white); font-size: 1.2rem; font-weight: 800; text-decoration: none; line-height: 1.2; }
+        .logo span { display: block; font-size: 0.7rem; font-weight: 400; opacity: 0.9; }
+        .donate-nav-btn { background: var(--accent); color: var(--primary); padding: 0.5rem 1rem; border-radius: 25px; text-decoration: none; font-weight: 700; font-size: 0.85rem; }
+        .nav-links { display: none; list-style: none; position: absolute; top: 60px; left: 0; width: 100%; background: var(--primary); padding: 1rem; }
+        .nav-links.active { display: block; }
+        .nav-links a { color: var(--white); text-decoration: none; display: block; padding: 0.8rem 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+        .hamburger { display: flex; flex-direction: column; gap: 5px; cursor: pointer; padding: 5px; }
+        .hamburger span { width: 25px; height: 3px; background: var(--white); border-radius: 2px; }
+        
+        .alert-banner { background: var(--secondary); color: var(--white); padding: 1rem; text-align: center; font-weight: 600; }
+        .page-header { background: var(--primary); color: var(--white); padding: 3rem 1rem; text-align: center; }
+        .page-header h1 { font-size: 2rem; margin-bottom: 0.5rem; }
+        .page-header p { opacity: 0.9; }
+        
+        .content-section { max-width: 800px; margin: 0 auto; padding: 2rem 1rem; }
+        .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-bottom: 2rem; }
+        .stat-card { background: var(--light); padding: 1.5rem; border-radius: 10px; text-align: center; border: 2px solid var(--border); }
+        .stat-card .number { font-size: 2rem; font-weight: 800; color: var(--secondary); display: block; }
+        .stat-card .label { font-size: 0.85rem; color: #718096; margin-top: 0.3rem; }
+        .crisis-card { background: var(--light); padding: 1.5rem; border-radius: 10px; margin-bottom: 1.5rem; border-left: 4px solid var(--secondary); }
+        .crisis-card h2 { color: var(--primary); margin-bottom: 1rem; font-size: 1.3rem; }
+        .crisis-card h3 { color: var(--secondary); margin: 1rem 0 0.5rem; font-size: 1.1rem; }
+        .crisis-card p { color: #718096; margin-bottom: 0.8rem; line-height: 1.8; }
+        .crisis-card ul { margin-left: 1.5rem; color: #718096; }
+        .crisis-card li { margin-bottom: 0.5rem; line-height: 1.6; }
+        .update-date { display: inline-block; background: var(--secondary); color: var(--white); padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.8rem; font-weight: 600; margin-bottom: 1rem; }
+        
+        .photo-placeholder { background: linear-gradient(135deg, #e2e8f0, #cbd5e0); height: 200px; display: flex; align-items: center; justify-content: center; flex-direction: column; color: #718096; font-size: 0.9rem; text-align: center; padding: 1rem; border-radius: 8px; margin: 1rem 0; }
+        .photo-placeholder .icon { font-size: 3rem; margin-bottom: 0.5rem; }
+        
+        .donation-footer { background: #1a365d; color: white; padding: 25px 15px; text-align: center; margin-top: 30px; }
+        .donation-footer h3 { font-size: 20px; font-weight: 800; margin-bottom: 10px; }
+        .donation-footer p { margin-bottom: 15px; font-size: 15px; opacity: 0.95; }
+        .donation-footer .btn-donate { display: inline-block; background: #c53030; color: white; padding: 12px 30px; text-decoration: none; border-radius: 25px; font-weight: 700; font-size: 16px; }
+        .donation-footer .contact-info { margin-top: 15px; padding: 10px; background: rgba(255,255,255,0.1); border-radius: 8px; }
+        .donation-footer .contact-info p { margin: 3px 0; font-size: 14px; }
+        
+        .main-footer { background: var(--primary); color: var(--white); padding: 1rem; text-align: center; border-top: 1px solid rgba(255,255,255,0.1); }
+        .main-footer p { opacity: 0.8; font-size: 0.85rem; }
+        
+        @media (min-width: 768px) { .nav-links { display: flex !important; position: static; width: auto; gap: 2rem; padding: 0; } .nav-links a { border: none; padding: 0; } .hamburger { display: none; } .page-header h1 { font-size: 2.5rem; } .stats-grid { grid-template-columns: repeat(4, 1fr); } }
+    </style>
+</head>
+<body>
+
+    <div class="donation-banner">
+        🚨 Support Rohingya Education, Health & Food | 
+        <a href="index.html#payment">DONATE NOW → Bkash/Nagad: 01821711952</a>
+    </div>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">Rohingya Relief<span>by RAHA | Direct Aid</span></a>
+            <a href="index.html#payment" class="donate-nav-btn">❤️ DONATE</a>
+            <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="timeline.html">Timeline</a></li>
+                <li><a href="history.html">History</a></li>
+                <li><a href="documentation.html">Documentation</a></li>
+                <li><a href="current-crisis.html" class="active">Crisis</a></li>
+                <li><a href="resources.html">Resources</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="alert-banner">⚠️ CRISIS ONGOING - Last Updated: June 2026</div>
+
+    <section class="page-header">
+        <h1>Current Crisis 2024-2026</h1>
+        <p>Real-time situation of the Rohingya humanitarian emergency</p>
+    </section>
+
+    <div class="content-section">
+
+        <div class="stats-grid">
+            <div class="stat-card"><span class="number">1.1M+</span><span class="label">Refugees in Bangladesh</span></div>
+            <div class="stat-card"><span class="number">457</span><span class="label">Dead/Missing at Sea (2025)</span></div>
+            <div class="stat-card"><span class="number">3,100</span><span class="label">Boat Journeys (Jan-May 2025)</span></div>
+            <div class="stat-card"><span class="number">1,878</span><span class="label">Total Dead/Missing Since 2022</span></div>
+        </div>
+
+        <div class="crisis-card">
+            <span class="update-date">2024</span>
+            <h2>Civil War & Forced Conscription</h2>
+            <div class="photo-placeholder">
+                <div class="icon">🏃</div>
+                <p><strong>Photo: New Refugees Arriving 2024</strong><br>Upload photo of refugees crossing<br>Naf River to Bangladesh</p>
+            </div>
+            <h3>Arakan Army vs. Military Junta</h3>
+            <p>Fighting between ethnic Rakhine Arakan Army and Myanmar's military junta intensified in Rakhine State. Rohingya civilians trapped between two armed forces.</p>
+            <h3>Forced Military Conscription</h3>
+            <p>Military junta began forcibly conscripting Rohingya men into military service. Using Rohingya as cannon fodder in losing war.</p>
+            <h3>New Refugee Wave</h3>
+            <p>65,000-70,000+ new Rohingya refugees crossed into Bangladesh, overwhelming already strained resources.</p>
+            <h3>Naf River Massacre (August 2024)</h3>
+            <p>Over 200 Rohingya killed in massacre at Naf River. Armed groups fired on boats attempting to cross.</p>
+        </div>
+
+        <div class="crisis-card">
+            <span class="update-date">2025-2026</span>
+            <h2>Current Status - Ongoing Emergency</h2>
+            <div class="photo-placeholder">
+                <div class="icon">🍚</div>
+                <p><strong>Photo: Famine in Camps</strong><br>Upload photo of food shortage<br>in Cox's Bazar refugee camps</p>
+            </div>
+            <h3>Refugee Camp Conditions</h3>
+            <p>Cox's Bazar camps remain world's largest refugee settlement, housing 1,133,981 registered refugees (April 2025). Conditions deteriorating:</p>
+            <ul>
+                <li>Severe overcrowding: 40,000+ people per square kilometer</li>
+                <li>Limited access to clean water and sanitation</li>
+                <li>Malnutrition rates rising, especially among children</li>
+                <li>Fire risks due to flammable shelter materials</li>
+                <li>Flood and landslide risks during monsoon</li>
+            </ul>
+            <h3>Boat Crisis Surge</h3>
+            <p>Desperate conditions drove massive increase in dangerous sea journeys:</p>
+            <ul>
+                <li>3,100 attempted sea journeys (Jan-May 2025)</li>
+                <li>457 people died or went missing at sea</li>
+                <li>Total dead or missing since 2022: 1,878</li>
+                <li>Smugglers charge $2,000-$4,000 per person</li>
+            </ul>
+            <h3>Food Security Crisis</h3>
+            <p>WFP forced to cut rations due to funding shortages:</p>
+            <ul>
+                <li>Food rations reduced from $12 to $6 per person per month</li>
+                <li>Rising malnutrition among children under 5</li>
+                <li>Increased child marriage and child labor</li>
+            </ul>
+            <h3>Repatriation Completely Stalled</h3>
+            <p>All attempts at voluntary repatriation failed. Myanmar refuses to guarantee safety and citizenship rights.</p>
+        </div>
+
+    </div>
+
+    <div class="donation-footer">
+        <h3>💚 Help Rohingya Refugees Today</h3>
+        <p>Your donation supports Education, Health & Food for families in Cox's Bazar</p>
+        <a href="index.html#payment" class="btn-donate">❤️ DONATE NOW</a>
+        <div class="contact-info">
+            <p>Bkash/Nagad: 01821711952 | WhatsApp: +8801821711952</p>
+            <p>Email: raha57.personal1@gmail.com | Cox's Bazar, Bangladesh</p>
+        </div>
+    </div>
+
+    <footer class="main-footer">
+        <p>&copy; 2026 Rohingya Historical Archive & Relief by RAHA</p>
+        <p>Documenting History | Supporting Education, Health & Food</p>
+        <p>100% Transparent. 0% Overhead. Real Impact.</p>
+    </footer>
+
+    <script>
+        function toggleMenu() { document.getElementById('navLinks').classList.toggle('active'); }
+    </script>
+
+</body>
+</html>'''
+
+with open('/mnt/agents/output/current-crisis.html', 'w', encoding='utf-8') as f:
+    f.write(current_crisis_html)
+
+print("✅ current-crisis.html created!")
