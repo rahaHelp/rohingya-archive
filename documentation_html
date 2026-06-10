@@ -1,0 +1,159 @@
+documentation_html = '''<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legal Documentation | Rohingya Genocide Evidence</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --primary: #1a365d; --secondary: #c53030; --accent: #d69e2e; --text: #2d3748; --light: #f7fafc; --white: #ffffff; --border: #e2e8f0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: var(--text); background: var(--white); }
+        
+        .donation-banner { background: linear-gradient(90deg, #c53030, #e53e3e); color: white; text-align: center; padding: 10px; font-weight: 700; font-size: 14px; }
+        .donation-banner a { color: #d69e2e; text-decoration: underline; font-weight: 800; }
+        
+        .navbar { background: var(--primary); position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .nav-container { max-width: 1200px; margin: 0 auto; padding: 1rem; display: flex; justify-content: space-between; align-items: center; }
+        .logo { color: var(--white); font-size: 1.2rem; font-weight: 800; text-decoration: none; line-height: 1.2; }
+        .logo span { display: block; font-size: 0.7rem; font-weight: 400; opacity: 0.9; }
+        .donate-nav-btn { background: var(--accent); color: var(--primary); padding: 0.5rem 1rem; border-radius: 25px; text-decoration: none; font-weight: 700; font-size: 0.85rem; }
+        .nav-links { display: none; list-style: none; position: absolute; top: 60px; left: 0; width: 100%; background: var(--primary); padding: 1rem; }
+        .nav-links.active { display: block; }
+        .nav-links a { color: var(--white); text-decoration: none; display: block; padding: 0.8rem 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+        .hamburger { display: flex; flex-direction: column; gap: 5px; cursor: pointer; padding: 5px; }
+        .hamburger span { width: 25px; height: 3px; background: var(--white); border-radius: 2px; }
+        
+        .page-header { background: var(--primary); color: var(--white); padding: 3rem 1rem; text-align: center; }
+        .page-header h1 { font-size: 2rem; margin-bottom: 0.5rem; }
+        .page-header p { opacity: 0.9; }
+        
+        .content-section { max-width: 800px; margin: 0 auto; padding: 2rem 1rem; }
+        .doc-card { background: var(--light); padding: 1.5rem; border-radius: 10px; margin-bottom: 1.5rem; border-left: 4px solid var(--primary); }
+        .doc-card h2 { color: var(--primary); margin-bottom: 1rem; font-size: 1.3rem; }
+        .doc-card h3 { color: var(--secondary); margin: 1rem 0 0.5rem; font-size: 1.1rem; }
+        .doc-card p { color: #718096; margin-bottom: 0.8rem; line-height: 1.8; }
+        .doc-card ul { margin-left: 1.5rem; color: #718096; }
+        .doc-card li { margin-bottom: 0.5rem; line-height: 1.6; }
+        .highlight-box { background: var(--white); padding: 1rem; border-radius: 8px; margin: 1rem 0; border: 1px solid var(--border); }
+        .highlight-box p { color: var(--text); font-weight: 600; }
+        
+        .donation-footer { background: #1a365d; color: white; padding: 25px 15px; text-align: center; margin-top: 30px; }
+        .donation-footer h3 { font-size: 20px; font-weight: 800; margin-bottom: 10px; }
+        .donation-footer p { margin-bottom: 15px; font-size: 15px; opacity: 0.95; }
+        .donation-footer .btn-donate { display: inline-block; background: #c53030; color: white; padding: 12px 30px; text-decoration: none; border-radius: 25px; font-weight: 700; font-size: 16px; }
+        .donation-footer .contact-info { margin-top: 15px; padding: 10px; background: rgba(255,255,255,0.1); border-radius: 8px; }
+        .donation-footer .contact-info p { margin: 3px 0; font-size: 14px; }
+        
+        .main-footer { background: var(--primary); color: var(--white); padding: 1rem; text-align: center; border-top: 1px solid rgba(255,255,255,0.1); }
+        .main-footer p { opacity: 0.8; font-size: 0.85rem; }
+        
+        @media (min-width: 768px) { .nav-links { display: flex !important; position: static; width: auto; gap: 2rem; padding: 0; } .nav-links a { border: none; padding: 0; } .hamburger { display: none; } .page-header h1 { font-size: 2.5rem; } }
+    </style>
+</head>
+<body>
+
+    <div class="donation-banner">
+        🚨 Support Rohingya Education, Health & Food | 
+        <a href="index.html#payment">DONATE NOW → Bkash/Nagad: 01821711952</a>
+    </div>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">Rohingya Relief<span>by RAHA | Direct Aid</span></a>
+            <a href="index.html#payment" class="donate-nav-btn">❤️ DONATE</a>
+            <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="timeline.html">Timeline</a></li>
+                <li><a href="history.html">History</a></li>
+                <li><a href="documentation.html" class="active">Documentation</a></li>
+                <li><a href="current-crisis.html">Crisis</a></li>
+                <li><a href="resources.html">Resources</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="page-header">
+        <h1>Legal Documentation</h1>
+        <p>Laws, identity documents, and international legal framework proving genocide</p>
+    </section>
+
+    <div class="content-section">
+
+        <div class="doc-card">
+            <h2>MYANMAR CITIZENSHIP LAWS</h2>
+            <h3>1948 Union Citizenship Act (Inclusive)</h3>
+            <p>The original citizenship law after independence was relatively inclusive. Rohingya were generally recognized as citizens and participated in democratic processes.</p>
+            <h3>1982 Burma Citizenship Law (Exclusionary)</h3>
+            <p>The most destructive law for Rohingya rights. Key provisions:</p>
+            <ul>
+                <li>Full citizenship restricted to 135 officially recognized "national races"</li>
+                <li>Rohingya were deliberately excluded from this list</li>
+                <li>Citizenship requires proof of ancestry in Myanmar before 1823</li>
+                <li>Created three tiers: Full Citizens, Associate Citizens, Naturalized Citizens</li>
+                <li>Rohingya were rendered effectively stateless</li>
+            </ul>
+            <div class="highlight-box">
+                <p>Impact: The 1982 law made the Rohingya vulnerable to arbitrary arrest, forced labor, movement restrictions, denial of education, healthcare, and marriage rights.</p>
+            </div>
+        </div>
+
+        <div class="doc-card">
+            <h2>IDENTITY DOCUMENTS SYSTEM</h2>
+            <h3>National Registration Cards (NRC)</h3>
+            <p>Originally issued to Rohingya as proof of citizenship. Starting in the 1970s, authorities systematically confiscated these cards.</p>
+            <h3>Foreign Registration Cards (FRC)</h3>
+            <p>Replaced NRCs for Rohingya. These cards explicitly identified holders as non-citizens or foreigners.</p>
+            <h3>Temporary Registration Cards</h3>
+            <p>Issued as temporary measure but became permanent. Did not confer citizenship rights.</p>
+            <h3>National Verification Cards (NVC)</h3>
+            <p>Introduced recently as "verification" process. Many Rohingya call them the "genocide card" because accepting them admits to being illegal immigrants.</p>
+            <div class="highlight-box">
+                <p>Current Status: Most Rohingya lack any valid documentation, making them completely stateless.</p>
+            </div>
+        </div>
+
+        <div class="doc-card">
+            <h2>INTERNATIONAL LEGAL RESPONSE</h2>
+            <h3>UN Fact-Finding Mission (2018)</h3>
+            <p>The UN concluded that the military committed genocide against the Rohingya. Recommended prosecution of senior military leaders.</p>
+            <h3>International Criminal Court (ICC)</h3>
+            <p>ICC has opened investigation into crimes against humanity, including deportation and persecution.</p>
+            <h3>International Court of Justice (ICJ)</h3>
+            <p>Gambia filed case against Myanmar. In January 2020, ICJ ordered provisional measures requiring Myanmar to prevent genocide.</p>
+            <h3>UN General Assembly Resolutions</h3>
+            <p>Multiple resolutions calling for accountability, safe return of refugees, restoration of citizenship rights.</p>
+        </div>
+
+    </div>
+
+    <div class="donation-footer">
+        <h3>💚 Help Rohingya Refugees Today</h3>
+        <p>Your donation supports Education, Health & Food for families in Cox's Bazar</p>
+        <a href="index.html#payment" class="btn-donate">❤️ DONATE NOW</a>
+        <div class="contact-info">
+            <p>Bkash/Nagad: 01821711952 | WhatsApp: +8801821711952</p>
+            <p>Email: raha57.personal1@gmail.com | Cox's Bazar, Bangladesh</p>
+        </div>
+    </div>
+
+    <footer class="main-footer">
+        <p>&copy; 2026 Rohingya Historical Archive & Relief by RAHA</p>
+        <p>Documenting History | Supporting Education, Health & Food</p>
+        <p>100% Transparent. 0% Overhead. Real Impact.</p>
+    </footer>
+
+    <script>
+        function toggleMenu() { document.getElementById('navLinks').classList.toggle('active'); }
+    </script>
+
+</body>
+</html>'''
+
+with open('/mnt/agents/output/documentation.html', 'w', encoding='utf-8') as f:
+    f.write(documentation_html)
+
+print("✅ documentation.html created!")
